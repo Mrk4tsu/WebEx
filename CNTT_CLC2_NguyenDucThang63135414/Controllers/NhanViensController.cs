@@ -64,21 +64,15 @@ namespace CNTT_CLC2_NguyenDucThang63135414.Models
         }
 
         // GET: NhanViens
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            var nhanViens = db.NhanViens.Include(n => n.PhongBan).OrderBy(nv => nv.TenNV);
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
 
-            var nhanViens = db.NhanViens.Include(n => n.PhongBan);
-            return View(nhanViens.ToList());
+            IPagedList<NhanVien> listNhanViens = nhanViens.ToPagedList(pageNumber, pageSize);
+            return View(listNhanViens);
         }
-        //public ActionResult Index(int? page)
-        //{
-        //    var nhanViens = db.NhanViens.Include(n => n.PhongBan).OrderBy(nv => nv.TenNV);
-        //    int pageSize = 5;
-        //    int pageNumber = (page ?? 1);
-
-        //    IPagedList<NhanVien> listNhanViens = nhanViens.ToPagedList(pageNumber, pageSize);
-        //    return View(listNhanViens);
-        //}
         // GET: NhanViens/Details/5
         public ActionResult Details(string id)
         {
