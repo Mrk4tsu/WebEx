@@ -1,0 +1,140 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<CNTT_CLC2_NguyenDucThang63135414.Models.NhanVien>
+
+@{
+    ViewBag.Title = "Index";
+    string gtinh = "";
+    int stt = 1;
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">
+            DANH SÁCH QUẢN LÝ NHÂN VIÊN
+        </h4>
+    </div>
+    <br>
+    
+    <a href="@Url.Action("Create")" class="btn btn-success mx-auto" style="width: 50%">
+        Đăng ký nhân viên mới
+    </a>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="text-center">
+                    <tr>
+                        <th>STT</th>
+                        <th>Họ</th>
+                        <th>Tên</th>
+                        <th>Giới tính</th>
+                        <th>Ngày sinh</th>
+                        <th>Lương</th>
+                        <th>Ảnh</th>
+                        <th>Địa chỉ</th>
+                        <th>Phòng ban</th>
+                        <th>Quản lý</th>
+                    </tr>
+                </thead>
+                @if (Model != null && Model.Any())
+                {
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @stt
+                                    @{stt++;}
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.HoNV)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TenNV)</td>
+                                <td>
+                                    @{if (item.GioiTinh == true)
+                                        { gtinh = "Nam"; }
+                                        else
+                                        { gtinh = "Nữ"; }
+                                    }
+                                    @gtinh
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.NgaySinh)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Luong)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AnhNV)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DiaChi)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PhongBan.TenPB)</td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("Edit", new { id = item.MaNV })" class="btn btn-success btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("Details", new { id = item.MaNV })" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-address-card"></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", new { id = item.MaNV })" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                }
+            </table>
+
+            <ul class="pagination justify-content-center align-content-between">
+                @if (Model.PageCount > 1)
+                {
+                    if (Model.HasPreviousPage)
+                    {
+                        <li class="paginate_button page-item previous">
+                            <a href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" class="page-link">Trước</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="paginate_button page-item previous disabled">
+                            <a class="page-link">Trước</a>
+                        </li>
+                    }
+
+                    for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        <li class="paginate_button page-item @(i == Model.PageNumber ? "active" : "")">
+                            <a href="@Url.Action("Index", new { page = i })" class="page-link">@i</a>
+                        </li>
+                    }
+
+                    if (Model.HasNextPage)
+                    {
+                        <li class="paginate_button page-item next">
+                            <a href="@Url.Action("Index", new { page = Model.PageNumber + 1 })" class="page-link">Sau</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="paginate_button page-item next disabled">
+                            <a class="page-link">Sau</a>
+                        </li>
+                    }
+                }
+            </ul>
+
+
+
+            @*<div class="pagination justify-content-center align-content-between">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>*@
+
+            @*<ul class="pagination justify-content-center align-content-between">
+                    <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                        <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                    </li>
+                    <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
+                    <li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                </ul>*@
+        </div>
+    </div>
+</div>

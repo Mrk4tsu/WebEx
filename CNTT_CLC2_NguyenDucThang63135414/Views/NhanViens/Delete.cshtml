@@ -1,0 +1,42 @@
+﻿@model CNTT_CLC2_NguyenDucThang63135414.Models.NhanVien
+
+@{
+    ViewBag.Title = "Delete";
+    string gtinh = "";
+}
+
+<div class=" align-items-center justify-content-between text-center">
+    <div class="card card-team ">
+        <div class="card-header text-center">
+            <h3 class="text-danger">Xác Nhận Xóa Nhân Viên @Html.DisplayFor(model => model.HoNV) @Html.DisplayFor(model => model.TenNV)</h3>
+        </div>
+        <div class="card-body display-6">
+            <img class="mb-3" src="~/Images/@Html.DisplayFor(model => model.AnhNV)" alt="...">
+            <div class="card-team"><strong>Họ: </strong> @Html.DisplayFor(model => model.HoNV)</div>
+            <div class="card-team"><strong>Tên: </strong> @Html.DisplayFor(model => model.TenNV)</div>
+            <div class="card-team">
+                <strong>Giới tính: </strong> @{if (Model.GioiTinh == true)
+                    { gtinh = "Nam"; }
+                    else
+                    { gtinh = "Nữ"; }
+                }
+                @gtinh
+            </div>
+            <div class="card-team"><strong>Ngày sinh: </strong> @Html.DisplayFor(model => model.NgaySinh)</div>
+            <div class="card-team"><strong>Lương: </strong> @Html.DisplayFor(model => model.Luong)</div>
+            <div class="card-team"><strong>Địa chỉ: </strong> @Html.DisplayFor(model => model.DiaChi)</div>
+            <div class="card-team"><strong>Phòng ban: </strong> @Html.DisplayFor(model => model.PhongBan.TenPB)</div>
+        </div>
+        <div class="card-footer text-center">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="submit" value="Delete" class="btn btn-danger mx-auto" style="width: 40%" />
+                <a href="@Url.Action("Index")" class="btn btn-success mx-auto" style="width: 40%">
+                    Quay lại danh sách
+                </a>
+            }
+        </div>
+    </div>
+</div>
