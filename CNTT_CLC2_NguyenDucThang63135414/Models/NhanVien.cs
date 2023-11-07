@@ -18,7 +18,7 @@ namespace CNTT_CLC2_NguyenDucThang63135414.Models
         public string MaNV { get; set; }
         public string HoNV { get; set; }
         public string TenNV { get; set; }
-        public Nullable<bool> GioiTinh { get; set; }
+        public bool GioiTinh { get; set; }
        
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]

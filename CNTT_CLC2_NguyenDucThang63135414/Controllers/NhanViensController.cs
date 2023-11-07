@@ -11,29 +11,28 @@ namespace CNTT_CLC2_NguyenDucThang63135414.Models
     public class NhanViensController : Controller
     {
         private QLNV63135414Entities db = new QLNV63135414Entities();
-        public ActionResult TimKiem()
+        public ActionResult TimKiem(int? page, string maNV)
         {
-            var nhanViens = db.NhanViens.Include(n => n.PhongBan);
-            return View(nhanViens.ToList());
-        }
-        [HttpPost]
-        public ActionResult TimKiem(string maNV)
-        {
+            int pageSize = 5; // Số lượng bản ghi trên mỗi trang
+            int pageNumber = (page ?? 1);
 
-            //var nhanViens = db.NhanViens.SqlQuery("exec NhanVien_DS '"+maNV+"' ");
-            /// var nhanViens = db.NhanViens.SqlQuery("SELECT * FROM NhanVien WHERE MaNV='" + maNV + "'");
-            var nhanViens = db.NhanViens.Where(abc => abc.MaNV == maNV);
-            return View(nhanViens.ToList());
+            var nhanViens = db.NhanViens.Where(abc => string.IsNullOrEmpty(maNV) || abc.MaNV == maNV)
+                .OrderBy(abc => abc.MaNV)
+                .ToPagedList(pageNumber, pageSize);
+            if (nhanViens.Count() == 0)
+            {
+                ViewBag.TB = "Không có thông tin tìm kiếm.";
+            }
+            return View(nhanViens);
         }
         [HttpGet]
-
-        public ActionResult TimKiemNC(string maNV = "", string hoTen = "", string gioiTinh = "", string luongMin = "", string luongMax = "", string diaChi = "", string maPB = "")
+        public ActionResult TimKiemNC(string maNV = "", string tenNV = "", string gioiTinh = "", string luongMin = "", string luongMax = "", string diaChi = "", string maPB = "")
         {
             string min = luongMin, max = luongMax;
             if (gioiTinh != "1" && gioiTinh != "0")
                 gioiTinh = null;
             ViewBag.maNV = maNV;
-            ViewBag.hoTen = hoTen;
+            ViewBag.hoTen = tenNV;
             ViewBag.gioiTinh = gioiTinh;
             if (luongMin == "")
             {
@@ -57,11 +56,12 @@ namespace CNTT_CLC2_NguyenDucThang63135414.Models
             }
             ViewBag.diaChi = diaChi;
             ViewBag.MaPB = new SelectList(db.PhongBans, "MaPB", "TenPB");
-            var nhanViens = db.NhanViens.SqlQuery("NhanVien_TimKiem'" + maNV + "','" + hoTen + "','" + gioiTinh + "','" + min + "','" + max + "',N'" + diaChi + "','" + maPB + "'");
+            var nhanViens = db.NhanViens.SqlQuery("NhanVien_TimKiem'" + maNV + "','" + tenNV + "','" + gioiTinh + "','" + min + "','" + max + "',N'" + diaChi + "','" + maPB + "'");
             if (nhanViens.Count() == 0)
                 ViewBag.TB = "Không có thông tin tìm kiếm.";
             return View(nhanViens.ToList());
         }
+
 
         // GET: NhanViens
         public ActionResult Index(int? page)
@@ -81,13 +81,31 @@ namespace CNTT_CLC2_NguyenDucThang63135414.Models
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             NhanVien nhanVien = db.NhanViens.Find(id);
+
             if (nhanVien == null)
             {
                 return HttpNotFound();
             }
             return View(nhanVien);
         }
-
+        public static string getMoneys(long m)
+        {
+            string text = string.Empty;
+            long num = m / 1000 + 1;
+            for (int i = 0; i < num; i++)
+            {
+                if (m >= 1000)
+                {
+                    long num2 = m % 1000;
+                    text = ((num2 == 0) ? (".000" + text) : ((num2 < 10) ? (".00" + num2 + text) : ((num2 < 100) ? (".0" + num2 + text) : ("." + num2 + text))));
+                    m /= 1000;
+                    continue;
+                }
+                text = m + text;
+                break;
+            }
+            return text;
+        }
         // GET: NhanViens/Create
         public ActionResult Create()
         {
@@ -102,7 +120,7 @@ namespace CNTT_CLC2_NguyenDucThang63135414.Models
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaNV,HoNV,TenNV,GioiTinh,NgaySinh,Luong,AnhNV,DiaChi,MaPB")] NhanVien nhanVien)
-        {            
+        {
             //System.Web.HttpPostedFileBase Avatar;
             var imgNV = Request.Files["Avatar"];
             //Lấy thông tin từ input type=file có tên Avatar
@@ -156,7 +174,7 @@ namespace CNTT_CLC2_NguyenDucThang63135414.Models
                 imgNV.SaveAs(path);
             }
             catch
-            { 
+            {
             }
             if (ModelState.IsValid)
             {

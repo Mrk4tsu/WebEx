@@ -10,11 +10,14 @@
 </head>
 <body>
     <div id="banner" style="width: 100%; height: 100%">
-        <img src="~/Images/ts2023.png" style="width: 100%"/>
+        <img src="~/Images/ts2023.png" style="width: 100%" />
     </div>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-secondary">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                <img src="~/Images/logo.png" alt="Your Application" style="max-width:70px" />
+            </a>
+            @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,7 +26,8 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Thông tin", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Danh sách", "Index", "NhanViens", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Tìm kiếm", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Tìm kiếm", "TimKiem", "NhanViens", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Tìm kiếm nâng cao", "TimKiemNC", "NhanViens", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>
@@ -35,7 +39,6 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
