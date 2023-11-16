@@ -99,7 +99,6 @@ E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\b
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\Microsoft.Extensions.Logging.Abstractions.dll
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\Microsoft.Extensions.Primitives.dll
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\Microsoft.Net.Http.Headers.dll
-E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\Microsoft.VisualStudio.Web.BrowserLink.dll
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\System.Buffers.dll
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\System.Memory.dll
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\System.Numerics.Vectors.dll
@@ -119,7 +118,6 @@ E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\b
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\Microsoft.Extensions.Logging.Abstractions.xml
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\Microsoft.Extensions.Primitives.xml
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\Microsoft.Net.Http.Headers.xml
-E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\Microsoft.VisualStudio.Web.BrowserLink.xml
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\System.Buffers.xml
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\System.Memory.xml
 E:\Study\Web\CNTT_CLC2_NguyenDucThang63135414\CNTT_CLC2_NguyenDucThang63135414\bin\System.Numerics.Vectors.xml

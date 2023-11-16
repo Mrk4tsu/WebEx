@@ -2,9 +2,23 @@
 
 @{
     ViewBag.Title = "Edit";
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var fileupload = $("#Avatar");
+            var image = $("#FileUpload");
+            image.click(function () {
+                fileupload.click();
+            });
+            fileupload.change(function () {
+                var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
+                document.getElementById("AnhNV").value = fileName;
+            });
+        });
+    </script>
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Nhanviens", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="card card-team ">
